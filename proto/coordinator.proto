@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+package coordinator;
+
+service Coordinator {
+  rpc SubmitJob (SubmitJobRequest) returns (SubmitJobReply) {}
+  rpc PollJob (PollJobRequest) returns (PollJobReply) {}
+  rpc Register (RegisterRequest) returns (RegisterReply) {}
+  rpc HeartBeat (HeartBeatRequest) returns (HeartBeatReply) {}
+  rpc JobRequest (JobRequestRequest) returns (JobRequestReply) {}
+  rpc JobDone (JobDoneRequest) returns (JobDoneReply) {}
+  rpc ConnectError(ConnectErrorRequest) returns (ConnectErrorReply) {}
+  rpc JobFailure (JobFailureRequest) returns (JobFailureReply) {}
+}
+
+message HeartBeatRequest {
+  uint32 worker_id = 1;
+}
+
+message HeartBeatReply {
+
+}
+
+message RegisterRequest {
+
+}
+
+message RegisterReply {
+  uint32 id = 1;
+}
+
+
+message SubmitJobRequest {
+  repeated string files = 1;
+  string output_dir = 2;
+  string app = 3;
+  uint32 n_reduce = 4;
+  bytes args = 5;
+}
+
+message SubmitJobReply {
+  uint32 job_id = 1;
+}
+
+message PollJobRequest {
+  uint32 job_id = 1;
+}
+
+message PollJobReply {
+  bool done = 1;
+  bool failed = 2;
+  repeated string errors = 3;
+}
+
+message JobRequestRequest {
+  uint32 worker_id = 1;
+}
+
+message JobRequestReply {
+  string file = 1;
+  bytes args = 2;
+  uint32 job_type = 3;
+  string app = 4;
+  repeated uint32 worker_ids = 5;
+  uint32 parent_job_id = 6;
+  uint32 job_id = 7;
+  uint32 reduce_bucket = 8;
+  uint32 valid = 9;
+  uint32 n_reduce = 10;
+  string output_dir = 11;
+  //  uint32 map_job_id = 12;
+}
+
+message JobDoneRequest {
+  uint32 worker_id = 1;
+  uint32 job_id = 2;
+  uint32 sub_job_id = 3;
+  uint32 job_type = 4;
+}
+
+message JobDoneReply {
+
+}
+
+
+message ConnectErrorRequest {
+  uint32 id = 1;
+  uint32 worker_id = 2;
+  uint32 parent_job_id = 3;
+  uint32 sub_job_id = 4;
+}
+
+message ConnectErrorReply {
+
+}
+
+message JobFailureRequest {
+  uint32 parent_job_id = 1;
+  string error = 2;
+}
+
+message JobFailureReply {
+}
+

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package worker;
+
+service Worker {
+  rpc MapDataRequest (MapDataRequestRequest) returns (MapDataRequestReply) {}
+}
+
+message MapDataRequestRequest {
+  uint32 job_id = 1;
+  uint32 bucket_num = 2;
+  bytes args = 3;
+  string app = 4;
+  string output_dir = 5;
+}
+
+message MapDataRequestReply {
+  bytes data = 1;
+}
