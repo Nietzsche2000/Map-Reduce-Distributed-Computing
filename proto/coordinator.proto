@@ -68,7 +68,6 @@ message JobRequestReply {
   uint32 valid = 9;
   uint32 n_reduce = 10;
   string output_dir = 11;
-  //  uint32 map_job_id = 12;
 }
 
 message JobDoneRequest {

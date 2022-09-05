@@ -66,8 +66,11 @@ pub struct Job {
     map_jobs: HashMap<u32, SubJob>,
     /** REDUCE JOB ID AND THE REDUCE JOB */
     reduce_jobs: HashMap<u32, SubJob>,
+    /** WHETHER THE JOB HAS COMPLETED */
     done: bool,
+    /** WHETHER THE JOB HAS FAILED */
     failed: bool,
+    /** THE ERROR ASSOCIATED WITH A ERRORED JOB */
     error_arr: Vec<String>,
 }
 

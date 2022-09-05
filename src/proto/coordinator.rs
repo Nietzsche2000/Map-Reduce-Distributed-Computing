@@ -73,7 +73,6 @@ pub struct JobRequestReply {
     pub valid: u32,
     #[prost(uint32, tag="10")]
     pub n_reduce: u32,
-    ///  uint32 map_job_id = 12;
     #[prost(string, tag="11")]
     pub output_dir: ::prost::alloc::string::String,
 }

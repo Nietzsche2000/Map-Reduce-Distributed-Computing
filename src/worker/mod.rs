@@ -140,6 +140,7 @@ async fn send_connect_error(client: &mut CoordinatorClient<Channel>, id: u32, wo
     return Ok(());
 }
 
+/** JOB ERROR FUNCTION TO LET THE COORDINATOR KNOW ABOUT ERROR */
 async fn send_job_error(client: &mut CoordinatorClient<Channel>, parent_job_id: u32, error: String) -> Result<()> {
     println!("WORKER SENDING JOB ERROR {}", parent_job_id);
     client.job_failure(JobFailureRequest {
